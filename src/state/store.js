@@ -2,9 +2,11 @@ import { applyMiddleware, compose, createStore, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
 
 import characterReducer from './reducers/characters';
+import dungeonReducer from './reducers/dungeons';
 
 const rootReducer = combineReducers({
-	characters: characterReducer
+	characters: characterReducer,
+	dungeons: dungeonReducer
 });
 
 const store = createStore(
