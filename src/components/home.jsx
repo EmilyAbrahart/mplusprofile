@@ -2,18 +2,22 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
 
-import { getDungeons } from "../state/actions/dungeons";
+import { getDungeons, getColors } from "../state/actions/dungeons";
 
 import Heading from "./heading";
 import CharactersData from "./charactersData";
 import Footer from "./footer";
 
-const Home = ({ dungeons: { isFetching, dungeonData }, getDungeons }) => {
+const Home = ({ dungeons: { colors, dungeonData }, getDungeons, getColors }) => {
   useEffect(() => {
-    if (dungeonData.length === 0) {
+    if (!dungeonData) {
       getDungeons();
     }
+    if (!colors) {
+      getColors();
+    }
   }, []);
+
   return (
     <HomeContainer>
       <Heading />
@@ -26,7 +30,7 @@ const Home = ({ dungeons: { isFetching, dungeonData }, getDungeons }) => {
   );
 };
 
-export default connect((state) => state, { getDungeons })(Home);
+export default connect((state) => state, { getDungeons, getColors })(Home);
 
 const HomeContainer = styled.div`
   box-sizing: border-box;
