@@ -78,6 +78,7 @@ const CharactersData = ({
               deleteCharacter={deleteCharacter}
               dungeonData={dungeonData}
               colors={colors}
+              active={activeFilter}
             />
           ))
         ) : (
