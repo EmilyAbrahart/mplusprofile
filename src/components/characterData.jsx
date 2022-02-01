@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import * as styles from "../styles";
 
@@ -6,6 +6,34 @@ import Dungeon from "./dungeon";
 
 const CharacterData = (props) => {
   const [showDelete, setShowDelete] = useState(false);
+  const [tyrDungeons, setTyrDungeons] = useState([]);
+  const [fortDungeons, setFortDungeons] = useState([]);
+
+  useEffect(() => {
+    if (tyrDungeons.length === 0) {
+      const tyrannicalDungeons = props.mythic_plus_best_runs
+        .filter((dungeon) => dungeon.affixes[0].name === "Tyrannical")
+        .concat(
+          props.mythic_plus_alternate_runs.filter(
+            (dungeon) => dungeon.affixes[0].name === "Tyrannical"
+          )
+        );
+      setTyrDungeons(tyrannicalDungeons);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (fortDungeons.length === 0) {
+      const fortifiedDungeons = props.mythic_plus_best_runs
+        .filter((dungeon) => dungeon.affixes[0].name === "Fortified")
+        .concat(
+          props.mythic_plus_alternate_runs.filter(
+            (dungeon) => dungeon.affixes[0].name === "Fortified"
+          )
+        );
+      setFortDungeons(fortifiedDungeons);
+    }
+  }, []);
 
   return (
     <CharacterDataContainer
@@ -30,7 +58,9 @@ const CharacterData = (props) => {
         </Avatar>
         {props.name}
       </CharacterClass>
-      <ScoreContainer color={props.mythic_plus_scores_by_season[0].segments.all.color}>
+      <ScoreContainer
+        color={props.mythic_plus_scores_by_season[0].segments.all.color}
+      >
         {props.mythic_plus_scores_by_season[0]
           ? Math.round(props.mythic_plus_scores_by_season[0].segments.all.score)
           : null}
@@ -46,12 +76,32 @@ const CharacterData = (props) => {
         )}
       </HighestWeeklyDungeon>
       <DungeonsContainer>
-        {props.dungeonData
+        {props.dungeonData && props.active === "ALL"
           ? props.dungeonData.map((dungeon) => (
               <Dungeon
                 key={dungeon.short_name}
                 name={dungeon.short_name}
                 dungeon={props.mythic_plus_best_runs.filter(
+                  (e) => e.short_name === dungeon.short_name
+                )}
+              />
+            ))
+          : props.dungeonData && props.active === "TYR"
+          ? props.dungeonData.map((dungeon) => (
+              <Dungeon
+                key={dungeon.short_name}
+                name={dungeon.short_name}
+                dungeon={tyrDungeons.filter(
+                  (e) => e.short_name === dungeon.short_name
+                )}
+              />
+            ))
+          : props.dungeonData && props.active === "FORT"
+          ? props.dungeonData.map((dungeon) => (
+              <Dungeon
+                key={dungeon.short_name}
+                name={dungeon.short_name}
+                dungeon={fortDungeons.filter(
                   (e) => e.short_name === dungeon.short_name
                 )}
               />
@@ -73,8 +123,6 @@ const CharacterDataContainer = styled.div`
   align-items: center;
   margin-bottom: 0.3rem;
   width: 1230px;
-  /* background-color: ${(props) =>
-    props.classColours[props.characterClass]}; */
   background-color: #232734;
   padding: 0 1rem;
   text-shadow: -1px -1px 0 #000, -1px 1px 0 #000, 1px -1px 0 #000;
@@ -82,7 +130,10 @@ const CharacterDataContainer = styled.div`
   position: relative;
   color: white;
   font-weight: 700;
-  /* box-shadow: inset 0 0 99999px rgba(35, 39, 52, 0.5); */
+
+  &:hover {
+    background-color: #3b4258;
+  }
 `;
 
 const CharacterClass = styled.div`
@@ -104,14 +155,17 @@ const DungeonsContainer = styled.div`
 const HighestWeeklyDungeon = styled.div`
   width: 48px;
   text-align: center;
-  color: #2b2b2b;
+  color: white;
   text-shadow: none;
 `;
 
 const DeleteButton = styled.button`
   height: 100%;
   width: 1.5rem;
-  background-color: #ff5851;
+  background-color: #1b1d27;
+  color: #ff5851;
+  font-size: 18px;
+  font-weight: bold;
   display: ${(props) => (props.showDelete ? "flex" : "none")};
   justify-content: center;
   align-items: center;
@@ -119,7 +173,6 @@ const DeleteButton = styled.button`
   padding: 0;
   position: absolute;
   left: -1.5rem;
-  border: 1px solid black;
 
   &:hover {
     cursor: pointer;
@@ -129,7 +182,7 @@ const DeleteButton = styled.button`
 const ScoreContainer = styled.div`
   font-weight: 700;
   font-size: 1.3rem;
-  color: ${(props) => props.color}
+  color: ${(props) => props.color};
 `;
 
 const Avatar = styled.div`

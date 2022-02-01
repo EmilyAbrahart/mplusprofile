@@ -18,18 +18,21 @@ const characterReducer = (state = initialState, action) => {
 		case types.GET_CHARACTERS_SUCCESS:
 			return {
 				...state,
-				characterList: action.payload
+				characterList: action.payload,
+				error: '',
 			};
 		case types.GET_CHARACTERS_DATA_SUCCESS:
 			return {
 				...state,
 				isFetching: false,
-				characterData: [...state.characterData, action.payload]
+				characterData: [...state.characterData, action.payload],
+				error: '',
 			};
 		case types.UPDATE_CHARACTER_DATA_SUCCESS:
 			return {
 				...state,
 				isFetching: false,
+				error: '',
 				characterData: [
 					...state.characterData.filter(
 						char => char.name !== action.payload.name

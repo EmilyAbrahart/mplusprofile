@@ -70,16 +70,23 @@ const CharactersData = ({
         </ButtonContainer>
 
         {characterData.length > 0 ? (
-          characterData.map((character, index) => (
-            <CharacterData
-              key={character.name}
-              {...character}
-              index={index}
-              deleteCharacter={deleteCharacter}
-              dungeonData={dungeonData}
-              colors={colors}
-            />
-          ))
+          characterData
+            .sort(
+              (a, b) =>
+                b.mythic_plus_scores_by_season[0].scores.all -
+                a.mythic_plus_scores_by_season[0].scores.all
+            )
+            .map((character, index) => (
+              <CharacterData
+                key={character.name}
+                {...character}
+                index={index}
+                deleteCharacter={deleteCharacter}
+                dungeonData={dungeonData}
+                colors={colors}
+                active={activeFilter}
+              />
+            ))
         ) : (
           <Welcome />
         )}
