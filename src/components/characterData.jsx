@@ -123,8 +123,6 @@ const CharacterDataContainer = styled.div`
   align-items: center;
   margin-bottom: 0.3rem;
   width: 1230px;
-  /* background-color: ${(props) =>
-    props.classColours[props.characterClass]}; */
   background-color: #232734;
   padding: 0 1rem;
   text-shadow: -1px -1px 0 #000, -1px 1px 0 #000, 1px -1px 0 #000;
@@ -132,7 +130,10 @@ const CharacterDataContainer = styled.div`
   position: relative;
   color: white;
   font-weight: 700;
-  /* box-shadow: inset 0 0 99999px rgba(35, 39, 52, 0.5); */
+
+  &:hover {
+    background-color: #3b4258;
+  }
 `;
 
 const CharacterClass = styled.div`
@@ -154,14 +155,17 @@ const DungeonsContainer = styled.div`
 const HighestWeeklyDungeon = styled.div`
   width: 48px;
   text-align: center;
-  color: #2b2b2b;
+  color: white;
   text-shadow: none;
 `;
 
 const DeleteButton = styled.button`
   height: 100%;
   width: 1.5rem;
-  background-color: #ff5851;
+  background-color: #1b1d27;
+  color: #ff5851;
+  font-size: 18px;
+  font-weight: bold;
   display: ${(props) => (props.showDelete ? "flex" : "none")};
   justify-content: center;
   align-items: center;
@@ -169,7 +173,6 @@ const DeleteButton = styled.button`
   padding: 0;
   position: absolute;
   left: -1.5rem;
-  border: 1px solid black;
 
   &:hover {
     cursor: pointer;
