@@ -1,18 +1,26 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 const Footer = () => {
-	return <FooterContainer>Powered by Raider.io {'\u2764'}</FooterContainer>;
+  return (
+    <FooterContainer>
+      Powered by <a href="https://raider.io/">Raider.io</a> {"\u2764"}
+    </FooterContainer>
+  );
 };
 
 export default Footer;
 
 const FooterContainer = styled.div`
-	position: absolute;
-	width: 100%;
-	bottom: 0;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
   left: 0;
   text-align: center;
-  padding-bottom: 0.5rem;
+  padding: 0.5rem;
   background-color: #1b1d27;
+  margin-bottom: 0;
+  a {
+    color: white;
+  }
 `;

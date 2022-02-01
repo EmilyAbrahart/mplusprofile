@@ -35,7 +35,7 @@ export default connect((state) => state, { getDungeons, getColors })(Home);
 const HomeContainer = styled.div`
   box-sizing: border-box;
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   padding: 2rem;
   flex-direction: column;
