@@ -15,7 +15,7 @@ export const getCharacterData = (name, server, region) => async dispatch => {
 
 	try {
 		const characterData = await axios.get(
-			`https://raider.io/api/v1/characters/profile?region=${region}&realm=${server}&name=${name}&fields=mythic_plus_best_runs:all,mythic_plus_scores_by_season:current,mythic_plus_weekly_highest_level_runs`
+			`https://raider.io/api/v1/characters/profile?region=${region}&realm=${server}&name=${name}&fields=mythic_plus_best_runs:all,mythic_plus_alternate_runs:all,mythic_plus_scores_by_season:current,mythic_plus_weekly_highest_level_runs`
 		);
 		dispatch({
 			type: types.GET_CHARACTERS_DATA_SUCCESS,

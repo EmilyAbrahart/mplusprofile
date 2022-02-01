@@ -19,3 +19,13 @@ export const classColors = {
 	'Warlock': 'rgba(135,135,237, 0.8)',
 	'Warrior': 'rgba(199,156,110, 0.8)'
 };
+
+export const levelColors = {
+	'poor': '#9d9d9d',
+	'common': '#ffffff',
+	'uncommon': '#1eff00',
+	'rare': '#0070dd',
+	'epic': '#a335ee',
+	'legendary': '#ff8000',
+	'artifact': '#e6cc80'
+};

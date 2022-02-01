@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
 
@@ -13,7 +13,8 @@ import {
 import refresh from "../img/refresh.svg";
 
 const CharactersData = ({
-  characters: { isFetching, characterList, characterData },
+  characters: { characterList, characterData },
+  dungeons: { dungeonData, colors },
   getCharacterData,
   updateCharacterData,
   deleteCharacter,
@@ -26,18 +27,48 @@ const CharactersData = ({
     });
   }, []);
 
+  const [activeFilter, setActiveFilter] = useState("ALL");
+
   const handleClick = () => {
     characterList.forEach((character) => {
       updateCharacterData(character.name, character.server, character.region);
     });
   };
 
+  const handleFilterClick = (filter) => {
+    setActiveFilter(filter);
+  };
+
   return (
     <CharactersDataContainer>
       <DataContainer>
-        <Button onClick={() => handleClick()}>
-          <img src={refresh} alt="update" />
-        </Button>
+        <ButtonContainer>
+          <Button onClick={() => handleClick()}>
+            <img src={refresh} alt="update" />
+          </Button>
+
+          <FilterButtonContainer>
+            <FilterButton
+              active={activeFilter}
+              onClick={() => handleFilterClick("ALL")}
+            >
+              ALL
+            </FilterButton>
+            <FilterButton
+              active={activeFilter}
+              onClick={() => handleFilterClick("TYR")}
+            >
+              TYR
+            </FilterButton>
+            <FilterButton
+              active={activeFilter}
+              onClick={() => handleFilterClick("FORT")}
+            >
+              FORT
+            </FilterButton>
+          </FilterButtonContainer>
+        </ButtonContainer>
+
         {characterData.length > 0 ? (
           characterData.map((character, index) => (
             <CharacterData
@@ -45,6 +76,8 @@ const CharactersData = ({
               {...character}
               index={index}
               deleteCharacter={deleteCharacter}
+              dungeonData={dungeonData}
+              colors={colors}
             />
           ))
         ) : (
@@ -71,14 +104,12 @@ const CharactersDataContainer = styled.div`
 
 const Button = styled.button`
   background-color: #3bca8b;
-  border: none;
-  color: #ffffff;
-  text-shadow: -1px -1px 0 #000, -1px 1px 0 #000, 1px -1px 0 #000;
-  border-radius: 25% 25% 0 0;
+  border: 1px solid black;
+  color: #1b1d27;
   margin: 0 1rem;
   width: 7rem;
   height: 1.7rem;
-  align-self: flex-end;
+  align-self: flex-start;
   font-size: 1.3rem;
   display: flex;
   flex-direction: row;
@@ -97,6 +128,30 @@ const Button = styled.button`
     height: 1.3rem;
     width: 1.3rem;
   }
+`;
+
+const FilterButton = styled(Button)`
+  font-size: 14px;
+  font-weight: bold;
+  margin: 0px;
+  background-color: ${(props) =>
+    props.active === props.children ? "#3bca8b" : "#1b1d27"};
+  color: ${(props) =>
+    props.active === props.children ? "#1b1d27" : "#3bca8b"};
+  border: ${(props) =>
+    props.active === props.children ? "1px solid black" : "none"};
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+`;
+
+const FilterButtonContainer = styled(ButtonContainer)`
+  justify-content: flex-end;
 `;
 
 const DataContainer = styled.div`
