@@ -30,7 +30,7 @@ const CharacterForm = ({ characters: { error }, getCharacterData }) => {
     );
     setName("");
     setServer("");
-    setRegion("");
+    // setRegion("");
   };
 
   return (
