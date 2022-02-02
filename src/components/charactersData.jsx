@@ -28,8 +28,19 @@ const CharactersData = ({
   }, []);
 
   const [activeFilter, setActiveFilter] = useState("ALL");
+  const [isSpinning, setIsSpinning] = useState(false);
+
+  const stopSpin = () => {
+    setIsSpinning(false);
+  }
+
+  const animateRefresh = () => {
+    setIsSpinning(true);
+    setTimeout(stopSpin, 1000);
+  };
 
   const handleClick = () => {
+    animateRefresh();
     characterList.forEach((character) => {
       updateCharacterData(character.name, character.server, character.region);
     });
@@ -44,7 +55,11 @@ const CharactersData = ({
       <DataContainer>
         <ButtonContainer>
           <Button onClick={() => handleClick()}>
-            <img src={refresh} alt="update" />
+            <img
+              src={refresh}
+              alt="update"
+              className={isSpinning ? "spin" : null}
+            />
           </Button>
 
           <FilterButtonContainer>
@@ -134,6 +149,18 @@ const Button = styled.button`
   img {
     height: 1.3rem;
     width: 1.3rem;
+
+    &.spin {
+      animation: spin 1s linear infinite;
+      @keyframes spin {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+    }
   }
 `;
 

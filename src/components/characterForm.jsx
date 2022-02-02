@@ -51,13 +51,14 @@ const CharacterForm = ({ characters: { error }, getCharacterData }) => {
             onChange={handleServerChange}
             value={server}
           />
-          <input
-            type="text"
-            name="region"
-            placeholder="Region"
-            onChange={handleRegionChange}
-            value={region}
-          />
+
+          <select name="region" onChange={handleRegionChange} defaultValue="">
+            <option value="" disabled>
+              Region
+            </option>
+            <option value="EU">EU</option>
+            <option value="NA">NA</option>
+          </select>
         </form>
         <button
           onClick={() => {
@@ -81,7 +82,7 @@ const Container = styled.div`
   align-items: center;
 
   .errorMessage {
-	  color: #ff5851;
+    color: #ff5851;
   }
 `;
 const FormContainer = styled.div`
@@ -96,11 +97,43 @@ const FormContainer = styled.div`
     align-items: center;
     justify-content: flex-start;
 
-    input {
+    input[type="text"] {
       margin: 0.5rem;
       padding: 0.5rem;
       width: 12rem;
+      height: 2.2rem;
       box-sizing: border-box;
+      border: none;
+      background-color: white;
+      font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI",
+        "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+        "Helvetica Neue", sans-serif;
+
+      &:focus {
+        outline: none;
+        border: 1px solid #3bca8b;
+        box-sizing: border-box;
+      }
+    }
+
+    select {
+      margin: 0.5rem;
+      padding: 0.5rem;
+      border: none;
+      background-color: white;
+      height: 2.2rem;
+      width: 6rem;
+      box-sizing: border-box;
+      font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI",
+        "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+        "Helvetica Neue", sans-serif;
+      text-align: center;
+
+      &:focus {
+        outline: none;
+        border: 1px solid #3bca8b;
+        box-sizing: border-box;
+      }
     }
   }
   button {
@@ -108,9 +141,12 @@ const FormContainer = styled.div`
     color: #2b2b2b;
     background-color: #3bca8b;
     width: 5rem;
+    height: 2.2rem;
     padding: 0.6rem;
     font-weight: 700;
     margin: 0.5rem;
+    outline: none;
+    box-sizing: border-box;
 
     &:hover {
       cursor: pointer;

@@ -22,11 +22,12 @@ width: 100%;
 position: absolute;
 top: 0;
 left: 0;
-padding: 1rem;
+padding: 1rem 3rem;
 box-sizing: border-box;
 display: flex;
 flex-direction: row;
 justify-content: space-between;
+align-items: center;
 
 span {
   color: #3bca8b;
