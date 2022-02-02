@@ -137,6 +137,7 @@ const CharacterDataContainer = styled.div`
 `;
 
 const CharacterClass = styled.div`
+  /* color: ${(props) => props.classColours[props.characterClass]}; */
   color: white;
   height: 1.5rem;
   display: flex;

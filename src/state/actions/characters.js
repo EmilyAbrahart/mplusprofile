@@ -62,7 +62,6 @@ export const deleteCharacter = (name) => (dispatch) => {
     characters.filter((c) => c.name.toLowerCase() !== name.toLowerCase())
   );
   localStorage.setItem("characters", updatedCharacters);
-  console.log(updatedCharacters);
 
   dispatch({
     type: types.DELETE_CHARACTER,
