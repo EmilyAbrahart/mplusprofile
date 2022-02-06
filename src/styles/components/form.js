@@ -36,3 +36,5 @@ export const Select = styled.select`
     border: 1px solid ${colors.main.secondary};
   }
 `;
+
+

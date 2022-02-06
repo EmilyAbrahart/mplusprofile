@@ -1,48 +1,30 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 
 import Dungeons from "./dungeons";
-import Dungeon from "./dungeon";
-
 import { flex, colors } from "../styles";
+import { MainButton } from "../styles/components";
 
 const Character = (props) => {
-  const [showDelete, setShowDelete] = useState(false);
-
   return (
-    <CharacterContainer
-      index={props.index}
-      onMouseEnter={() => setShowDelete(true)}
-      onMouseLeave={() => setShowDelete(false)}
-    >
+    <CharacterContainer index={props.index}>
       <CharacterClass>
         <Avatar>
-          <img src={props.avatar} alt="avatar" />
+          {props.showDelete ? (
+            <DeleteButton onClick={() => props.deleteCharacter(props.name)}>
+              X
+            </DeleteButton>
+          ) : (
+            <img src={props.avatar} alt="avatar" />
+          )}
         </Avatar>
-        {props.name}
-        <DeleteButton
-          onClick={() => props.deleteCharacter(props.name)}
-          showDelete={showDelete}
-        >
-          x
-        </DeleteButton>
+        <NameContainer>{props.name}</NameContainer>
       </CharacterClass>
       <ScoreContainer color={props.dungeons.scores.all.color}>
         {props.dungeons.scores.all
           ? Math.round(props.dungeons.scores.all.score)
           : null}
       </ScoreContainer>
-
-      <HighestWeeklyDungeon>
-        {props.dungeons.weekly[0] ? (
-          <Dungeon
-            dungeon={props.dungeons.weekly[0]}
-            name={props.dungeons.weekly[0].short_name}
-          />
-        ) : (
-          "--"
-        )}
-      </HighestWeeklyDungeon>
       <Dungeons
         dungeons={props.dungeons}
         dungeonData={props.dungeonData}
@@ -76,19 +58,12 @@ const CharacterClass = styled.div`
   font-size: 1.3rem;
 `;
 
-const HighestWeeklyDungeon = styled.div`
-  padding: 0 1rem;
-  text-align: center;
-  color: ${colors.main.light};
-  text-shadow: none;
-`;
-
-const DeleteButton = styled.button`
-  ${flex("row", "center", "center")};
-  padding: 0.3rem;
-  color: ${colors.main.warning};
-  display: ${(props) => (props.showDelete ? "flex" : "none")};
-`;
+// const DeleteButton = styled.button`
+//   ${flex("row", "center", "center")};
+//   padding: 0.3rem;
+//   color: ${colors.main.warning};
+//   display: ${(props) => (props.showDelete ? "flex" : "none")};
+// `;
 
 const ScoreContainer = styled.div`
   font-weight: 700;
@@ -107,4 +82,20 @@ const Avatar = styled.div`
     height: 100%;
     width: 100%;
   }
+`;
+
+const NameContainer = styled.div`
+  width: 8rem;
+  margin-right: 1rem;
+`;
+
+const DeleteButton = styled(MainButton)`
+  ${flex("row", "center", "center")};
+  border: 1px solid ${colors.main.warning};
+  height: 2.9rem;
+  width: 2rem;
+  padding: 0 1.5rem;
+  margin: 0;
+  background-color: ${colors.main.primary.dark};
+  color: ${colors.main.warning};
 `;

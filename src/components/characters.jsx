@@ -10,12 +10,8 @@ import {
 } from "../state/actions/characters";
 
 import { flex, colors } from "../styles";
-import {
-  RefreshIcon,
-  CircleIcon,
-  TyrannicalIcon,
-  FortifiedIcon,
-} from "../img/icons";
+import { Select } from "../styles/components";
+import { RefreshIcon, DeleteIcon } from "../img/icons";
 
 const Characters = ({
   characters: { characterList, characterData },
@@ -25,6 +21,11 @@ const Characters = ({
 }) => {
   const [activeFilter, setActiveFilter] = useState("ALL");
   const [isSpinning, setIsSpinning] = useState(false);
+  const [showDelete, setShowDelete] = useState(false);
+
+  const handleFilterChange = (event) => {
+    setActiveFilter(event.target.value);
+  };
 
   // refresh button animation
   const stopSpin = () => {
@@ -44,6 +45,10 @@ const Characters = ({
     });
   };
 
+  const handleToggleShowDelete = () => {
+    setShowDelete(!showDelete);
+  };
+
   const handleFilterClick = (filter) => {
     setActiveFilter(filter);
   };
@@ -54,29 +59,48 @@ const Characters = ({
         <Button onClick={() => handleClick()}>
           <RefreshIcon className={isSpinning ? "spin" : null} />
         </Button>
+        <DeleteToggleButton
+          onClick={() => handleToggleShowDelete()}
+          showDelete={showDelete}
+        >
+          <DeleteIcon />
+        </DeleteToggleButton>
 
         <FilterButtonContainer>
+          <FilterSelect onChange={handleFilterChange} defaultValue="ALL">
+            <option value="WEEK">Weekly</option>
+            <option value="ALL">Overall</option>
+            <option value="TYR">Tyrannical</option>
+            <option value="FORT">Fortified</option>
+          </FilterSelect>
+          <FilterButton
+            active={activeFilter}
+            onClick={() => handleFilterClick("WEEK")}
+            value="WEEK"
+          >
+            Weekly
+          </FilterButton>
           <FilterButton
             active={activeFilter}
             onClick={() => handleFilterClick("ALL")}
             value="ALL"
           >
-            <CircleIcon active={activeFilter} />
+            Overall
           </FilterButton>
           <FilterButton
             active={activeFilter}
             onClick={() => handleFilterClick("TYR")}
             value="TYR"
           >
-            <TyrannicalIcon active={activeFilter} />
+            Tyrannical
           </FilterButton>
-          <FortifiedFilterButton
+          <FilterButton
             active={activeFilter}
             onClick={() => handleFilterClick("FORT")}
             value="FORT"
           >
-            <FortifiedIcon active={activeFilter} />
-          </FortifiedFilterButton>
+            Fortified
+          </FilterButton>
         </FilterButtonContainer>
       </ButtonContainer>
       <DataContainer>
@@ -92,6 +116,7 @@ const Characters = ({
               deleteCharacter={deleteCharacter}
               dungeonData={dungeonData}
               active={activeFilter}
+              showDelete={showDelete}
             />
           ))}
       </DataContainer>
@@ -113,11 +138,9 @@ const CharactersDataContainer = styled.div`
 const Button = styled.button`
   ${flex("row", "center", "center")};
   background-color: ${colors.main.secondary};
-  border: 1px solid ${colors.main.primary.dark};
   color: ${colors.main.primary.dark};
-  margin: 0 1rem;
+  margin: 0;
   padding: 0.5rem 1rem;
-  align-self: flex-start;
   font-size: 1.3rem;
 
   &:focus {
@@ -130,43 +153,65 @@ const Button = styled.button`
 `;
 
 const FilterButton = styled(Button)`
-  font-size: 14px;
+  font-size: 1rem;
   font-weight: bold;
   margin: 0px;
   background-color: ${(props) =>
-    props.active === props.value ? colors.main.secondary : colors.main.primary.dark};
+    props.active === props.value
+      ? colors.main.secondary
+      : colors.main.primary.dark};
 
-  border: ${(props) =>
-    props.active === props.value ? "1px solid black" : "none"};
+  color: ${(props) =>
+    props.active === props.value
+      ? colors.main.primary.dark
+      : colors.main.secondary};
 
-  svg {
-    stroke: ${(props) =>
-      props.active === props.value ? colors.main.primary.dark : colors.main.secondary};
-  }
-`;
-
-const FortifiedFilterButton = styled(FilterButton)`
-  svg {
-    stroke: none;
-    path {
-      fill: ${(props) =>
-        props.active === props.value ? colors.main.primary.dark : colors.main.secondary};
-    }
+  @media (max-width: 530px) {
+    display: none;
   }
 `;
 
 const ButtonContainer = styled.div`
-  ${flex("row", "space-between", "center", "none")};
+  ${flex("row", "space-between", "end", "none")};
   width: 100%;
 `;
 
 const FilterButtonContainer = styled(ButtonContainer)`
   justify-content: flex-end;
+  @media (max-width: 530px) {
+    width: 80%;
+  }
 `;
 
 const DataContainer = styled.div`
   ${flex("column", "flex-start", "center")};
   width: 100%;
   min-height: 80%;
-  border: 1px solid ${colors.main.secondary};
+  border-top: 1px solid ${colors.main.secondary};
+`;
+
+const FilterSelect = styled(Select)`
+  display: none;
+  padding: 0.2rem 1rem;
+  margin-bottom: 0;
+  width: 9rem;
+  font-size: 1rem;
+  background-color: ${colors.main.primary.dark};
+  color: ${colors.main.secondary};
+  &:hover {
+    border: none;
+  }
+
+  @media (max-width: 530px) {
+    display: block;
+  }
+`;
+
+const DeleteToggleButton = styled(Button)`
+  background-color: ${(props) =>
+    props.showDelete ? colors.main.secondary : colors.main.primary.dark};
+  svg path {
+    stroke: ${(props) =>
+      props.showDelete ? colors.main.primary.dark : colors.main.secondary};
+  }
 `;

@@ -53,12 +53,16 @@ const HomeContainer = styled.div`
   ${flex("column", "space-between", "center")};
   width: 100vw;
   min-height: 100vh;
-  padding: 0 2rem;
+  padding: 0;
+
+  @media (max-width: 470px) {
+    padding: 0;
+  }
 `;
 
 const MainContent = styled.main`
   width: 90vw;
   max-width: 1300px;
-  height: 80vh;
+  min-height: 80vh;
   margin-top: 1rem;
 `;

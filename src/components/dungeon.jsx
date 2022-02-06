@@ -13,9 +13,13 @@ import TOP from "../img/dungeons/TOP.webp";
 
 const Dungeon = ({ name, dungeon }) => {
   return (
-    <DungeonContainer name={name} dungeon={dungeon[0] || dungeon}>
+    <DungeonContainer
+      name={name}
+      dungeon={dungeon[0] || dungeon}
+      className="dungeon"
+    >
       <div className="name">
-        <h3>{name}</h3>
+        <h3>{name ? name : null}</h3>
       </div>
       <div className="level">
         <h3>
@@ -82,6 +86,9 @@ const DungeonContainer = styled.div`
   position: relative;
   text-align: center;
   border: 1px solid black;
+  @media (max-width: 749px) {
+    margin-top: 0.5rem;
+  }
 
   .name {
     position: absolute;
