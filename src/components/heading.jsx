@@ -1,35 +1,43 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
+import { connect } from "react-redux";
+import { flex, colors } from "../styles";
+import { Logo } from "../img/logo";
 
-import CharacterForm from './characterForm';
+import CharacterForm from "./characterForm";
 
-
-const Heading = () => {
-	return (
-		<HeadingContainer>
-			<h1>
-				MYTHIC <span>PLUS</span> PROFILE<span>.</span>
-			</h1>
-			<CharacterForm />
-		</HeadingContainer>
-	);
+const Heading = ({ characters: { characterList } }) => {
+  return (
+    <HeadingContainer>
+      <Logo />
+      {characterList.length > 0 ? <CharacterForm /> : null}
+    </HeadingContainer>
+  );
 };
 
-export default Heading;
+export default connect((state) => state)(Heading);
 
 const HeadingContainer = styled.div`
-width: 100%;
-position: absolute;
-top: 0;
-left: 0;
-padding: 1rem 3rem;
-box-sizing: border-box;
-display: flex;
-flex-direction: row;
-justify-content: space-between;
-align-items: center;
+  ${flex("row", "space-between", "center")};
+  width: 100%;
+  padding-top: 0.5rem;
 
-span {
-  color: #3bca8b;
-}
-`
+  span {
+    color: ${colors.main.secondary};
+  }
+  div.form-container {
+    ${flex("row", "flex-end", "center")};
+    form {
+      ${flex("row", "center", "center")};
+      width: auto;
+
+      input,
+      select {
+        width: auto;
+      }
+    }
+    button {
+      width: auto;
+    }
+  }
+`;

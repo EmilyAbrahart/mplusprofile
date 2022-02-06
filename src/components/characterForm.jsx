@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import { getCharacterData } from "../state/actions/characters";
+import { flex, colors } from "../styles";
+import { Form, Input, Select, MainButton } from "../styles/components";
 
 const CharacterForm = ({ characters: { error }, getCharacterData }) => {
   const [name, setName] = useState("");
@@ -35,16 +37,16 @@ const CharacterForm = ({ characters: { error }, getCharacterData }) => {
 
   return (
     <Container>
-      <FormContainer>
-        <form>
-          <input
+      <FormContainer className='form-container'>
+        <Form>
+          <Input
             type="text"
             name="name"
             placeholder="Character Name"
             onChange={handleNameChange}
             value={name}
           />
-          <input
+          <Input
             type="text"
             name="server"
             placeholder="Server"
@@ -52,21 +54,25 @@ const CharacterForm = ({ characters: { error }, getCharacterData }) => {
             value={server}
           />
 
-          <select name="region" onChange={handleRegionChange} defaultValue="">
-            <option value="" disabled>
+          <Select
+            name="region"
+            onChange={handleRegionChange}
+            defaultValue="REGION"
+          >
+            <option value="REGION" disabled>
               Region
             </option>
             <option value="EU">EU</option>
             <option value="NA">NA</option>
-          </select>
-        </form>
-        <button
+          </Select>
+        </Form>
+        <MainButton
           onClick={() => {
             handleSubmit();
           }}
         >
           ADD
-        </button>
+        </MainButton>
       </FormContainer>
       {error ? <div className="errorMessage">Character not found.</div> : null}
     </Container>
@@ -76,80 +82,27 @@ const CharacterForm = ({ characters: { error }, getCharacterData }) => {
 export default connect((state) => state, { getCharacterData })(CharacterForm);
 
 const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
+  ${flex("column", "flex-start", "center")}
+  width: 90%;
+  border-radius: 1rem;
 
   .errorMessage {
-    color: #ff5851;
+    color: ${colors.main.warning};
   }
 `;
 const FormContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
+  ${flex("column", "center", "center")};
+  width: 100%;
 
   form {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-
-    input[type="text"] {
-      margin: 0.5rem;
-      padding: 0.5rem;
-      width: 12rem;
-      height: 2.2rem;
-      box-sizing: border-box;
-      border: none;
-      background-color: white;
-      font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI",
-        "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
-        "Helvetica Neue", sans-serif;
-
-      &:focus {
-        outline: none;
-        border: 1px solid #3bca8b;
-        box-sizing: border-box;
-      }
-    }
-
-    select {
-      margin: 0.5rem;
-      padding: 0.5rem;
-      border: none;
-      background-color: white;
-      height: 2.2rem;
-      width: 6rem;
-      box-sizing: border-box;
-      font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI",
-        "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
-        "Helvetica Neue", sans-serif;
-      text-align: center;
-
-      &:focus {
-        outline: none;
-        border: 1px solid #3bca8b;
-        box-sizing: border-box;
-      }
-    }
+    width: 100%;
   }
-  button {
-    border: none;
-    color: #2b2b2b;
-    background-color: #3bca8b;
-    width: 5rem;
-    height: 2.2rem;
-    padding: 0.6rem;
-    font-weight: 700;
-    margin: 0.5rem;
-    outline: none;
-    box-sizing: border-box;
+  
+  input {
+    width: 50%;
+  }
 
-    &:hover {
-      cursor: pointer;
-    }
+  select {
+    width: 50%;
   }
 `;
