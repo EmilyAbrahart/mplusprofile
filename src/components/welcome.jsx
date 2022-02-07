@@ -1,22 +1,21 @@
 import React from "react";
 import styled from "styled-components";
 import { flex, colors } from "../styles";
-import HeroImg from "../img/hero.webp";
+import HeroArt from "../img/HeroArt.png";
 import CharacterForm from "./characterForm";
 
 const Welcome = () => {
   return (
     <WelcomeContainer>
-      <BackgroundLayer>
-        <ContentContainer>
-          <h1>
-            Mythic <span>Plus</span> Profile<span>.</span>
-          </h1>
-          <FormContainer>
-            <CharacterForm />
-          </FormContainer>
-        </ContentContainer>
-      </BackgroundLayer>
+      <ContentContainer>
+        <h1>
+          Mythic <span>Plus</span> Profile<span>.</span>
+        </h1>
+        <FormContainer>
+          <CharacterForm />
+        </FormContainer>
+      </ContentContainer>
+      <HeroImage src={HeroArt} />
     </WelcomeContainer>
   );
 };
@@ -24,35 +23,29 @@ const Welcome = () => {
 export default Welcome;
 
 const WelcomeContainer = styled.div`
+position: relative;
+  ${flex("row", "center", "center")}
   width: 100%;
   min-height: 80vh;
-  background-color: ${colors.main.primary.light};
-  background-image: url(${HeroImg});
-  background-position: left;
-  border: 1px solid ${colors.main.secondary};
 
   @media (max-width: 1230px) {
     background-position: center;
   }
 
   span {
-    color: ${colors.main.secondary};
+    color: ${colors.main.primary.extra_dark};
   }
-`;
-
-const BackgroundLayer = styled.div`
-  ${flex("column", "center", "flex-start")};
-  width: 100%;
-  min-height: 80vh;
-  background: linear-gradient(to right, rgba(7, 3, 14, 0.9), rgba(7, 3, 14, 0.3));
 `;
 
 const ContentContainer = styled.div`
   ${flex("column", "center", "center")}
   width: 50%;
+  background-color: ${colors.main.primary.light};
+  padding: 2rem 4rem;
+  border-radius: 2rem;
 
   @media (max-width: 1230px) {
-    width: 100%;
+    width: 80%;
     text-align: center;
   }
 
@@ -63,11 +56,25 @@ const ContentContainer = styled.div`
 
 const FormContainer = styled.div`
   width: 90%;
-    ${flex('column', 'center', 'center')};
+  ${flex("column", "center", "center")};
 
-    @media (max-width: 430px) {
-      button {
-        width: 80%;
-      }
+  @media (max-width: 1230px) {
+    input, select, button {
+      width: 60%;
     }
+  }
+
+  @media (max-width: 430px) {
+    input, select, button {
+      width: 80%;
+    }
+  }
+`;
+
+const HeroImage = styled.img`
+position: absolute;
+right: 0;
+bottom: 0;
+  height: auto;
+  width: 50%;
 `;

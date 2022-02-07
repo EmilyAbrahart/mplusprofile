@@ -86,6 +86,7 @@ const DungeonContainer = styled.div`
   position: relative;
   text-align: center;
   border: 1px solid black;
+  border-radius: 0.3rem;
   @media (max-width: 749px) {
     margin-top: 0.5rem;
   }
