@@ -67,40 +67,40 @@ const Characters = ({
           <DeleteIcon /> <ButtonLabelWithIcon>Delete</ButtonLabelWithIcon>
         </DeleteToggleButton>
 
-          <FilterSelect onChange={handleFilterChange} defaultValue="ALL">
-            <option value="WEEK">Weekly</option>
-            <option value="ALL">Overall</option>
-            <option value="TYR">Tyrannical</option>
-            <option value="FORT">Fortified</option>
-          </FilterSelect>
-          <FilterButton
-            active={activeFilter}
-            onClick={() => handleFilterClick("WEEK")}
-            value="WEEK"
-          >
-            <ButtonLabel>Weekly</ButtonLabel>
-          </FilterButton>
-          <FilterButton
-            active={activeFilter}
-            onClick={() => handleFilterClick("ALL")}
-            value="ALL"
-          >
-            Overall
-          </FilterButton>
-          <FilterButton
-            active={activeFilter}
-            onClick={() => handleFilterClick("TYR")}
-            value="TYR"
-          >
-            <ButtonLabel>Tyrannical</ButtonLabel>
-          </FilterButton>
-          <FilterButton
-            active={activeFilter}
-            onClick={() => handleFilterClick("FORT")}
-            value="FORT"
-          >
-            <ButtonLabel>Fortified</ButtonLabel>
-          </FilterButton>
+        <FilterSelect onChange={handleFilterChange} defaultValue="ALL">
+          <option value="WEEK">Weekly</option>
+          <option value="ALL">Overall</option>
+          <option value="TYR">Tyrannical</option>
+          <option value="FORT">Fortified</option>
+        </FilterSelect>
+        <FilterButton
+          active={activeFilter}
+          onClick={() => handleFilterClick("WEEK")}
+          value="WEEK"
+        >
+          <ButtonLabel>Weekly</ButtonLabel>
+        </FilterButton>
+        <FilterButton
+          active={activeFilter}
+          onClick={() => handleFilterClick("ALL")}
+          value="ALL"
+        >
+          Overall
+        </FilterButton>
+        <FilterButton
+          active={activeFilter}
+          onClick={() => handleFilterClick("TYR")}
+          value="TYR"
+        >
+          <ButtonLabel>Tyrannical</ButtonLabel>
+        </FilterButton>
+        <FilterButton
+          active={activeFilter}
+          onClick={() => handleFilterClick("FORT")}
+          value="FORT"
+        >
+          <ButtonLabel>Fortified</ButtonLabel>
+        </FilterButton>
       </ButtonContainer>
       <DataContainer>
         {characterData
@@ -140,6 +140,9 @@ const ButtonLabel = styled.div`
 
 const ButtonLabelWithIcon = styled(ButtonLabel)`
   margin-left: 1rem;
+  @media (max-width: 650px) {
+    margin: 0;
+  }
 `;
 
 const Button = styled.button`

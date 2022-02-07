@@ -23,7 +23,7 @@ const Welcome = () => {
 export default Welcome;
 
 const WelcomeContainer = styled.div`
-position: relative;
+  position: relative;
   ${flex("row", "center", "center")}
   width: 100%;
   min-height: 80vh;
@@ -31,9 +31,14 @@ position: relative;
   @media (max-width: 1230px) {
     background-position: center;
   }
+  @media (max-width: 650px) {
+    img {
+      display: none;
+    }
+  }
 
   span {
-    color: ${colors.main.primary.extra_dark};
+    color: ${colors.main.secondary};
   }
 `;
 
@@ -49,6 +54,18 @@ const ContentContainer = styled.div`
     text-align: center;
   }
 
+  @media (max-width: 650px) {
+    width: 90%;
+
+    img {
+      display: none;
+    }
+  }
+
+  @media (max-width: 450px) {
+    padding: 2rem;
+  }
+
   h1 {
     font-size: 3rem;
   }
@@ -59,22 +76,36 @@ const FormContainer = styled.div`
   ${flex("column", "center", "center")};
 
   @media (max-width: 1230px) {
-    input, select, button {
+    input,
+    select,
+    button {
       width: 60%;
     }
   }
-
-  @media (max-width: 430px) {
-    input, select, button {
+  @media (max-width: 650px) {
+    width: 100%;
+    input,
+    select,
+    button {
       width: 80%;
     }
+  }
+  @media (max-width: 550px) {
+    input,
+    select,
+    button {
+      width: 90%;
+    }
+  }
+  @media (max-width: 450px) {
+    width: 100%;
   }
 `;
 
 const HeroImage = styled.img`
-position: absolute;
-right: 0;
-bottom: 0;
+  position: absolute;
+  right: 0;
+  bottom: 0;
   height: auto;
   width: 50%;
 `;
