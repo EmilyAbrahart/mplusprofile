@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { levelColors } from "../styles";
+import { colors } from "../styles";
 
 import DOS from "../img/dungeons/DOS.webp";
 import HOA from "../img/dungeons/HOA.webp";
@@ -13,9 +13,13 @@ import TOP from "../img/dungeons/TOP.webp";
 
 const Dungeon = ({ name, dungeon }) => {
   return (
-    <DungeonContainer name={name} dungeon={dungeon[0] || dungeon}>
+    <DungeonContainer
+      name={name}
+      dungeon={dungeon[0] || dungeon}
+      className="dungeon"
+    >
       <div className="name">
-        <h3>{name}</h3>
+        <h3>{name ? name : null}</h3>
       </div>
       <div className="level">
         <h3>
@@ -75,13 +79,16 @@ const DungeonContainer = styled.div`
   align-items: center;
   width: 3rem;
   height: 3rem;
-  margin-right: 1rem;
+  margin: 0 0.5rem;
   border: 1px solid #2b2b2b;
   background-blend-mode: saturation;
   text-shadow: -1px -1px 0 #000, -1px 1px 0 #000, 1px -1px 0 #000;
   position: relative;
   text-align: center;
   border: 1px solid black;
+  @media (max-width: 749px) {
+    margin-top: 0.5rem;
+  }
 
   .name {
     position: absolute;
@@ -104,18 +111,18 @@ const DungeonContainer = styled.div`
     h3 {
       color: ${(props) =>
         props.dungeon.num_keystone_upgrades === 0
-          ? levelColors.poor
+          ? colors.rarity.poor
           : props.dungeon.mythic_level < 5
-          ? levelColors.common
+          ? colors.rarity.common
           : props.dungeon.mythic_level < 10
-          ? levelColors.uncommon
+          ? colors.rarity.uncommon
           : props.dungeon.mythic_level < 15
-          ? levelColors.rare
+          ? colors.rarity.rare
           : props.dungeon.mythic_level < 20
-          ? levelColors.epic
+          ? colors.rarity.epic
           : props.dungeon.mythic_level < 25
-          ? levelColors.legendary
-          : levelColors.artifact};
+          ? colors.rarity.legendary
+          : colors.rarity.artifact};
       font-size: 1.5rem;
       margin: 0;
     }

@@ -1,35 +1,86 @@
-import React from 'react';
-import styled from 'styled-components';
+import React, { useState } from "react";
+import styled from "styled-components";
+import { connect } from "react-redux";
+import { flex, colors } from "../styles";
+import { MainButton } from "../styles/components";
+import { Logo } from "../img/logo";
+import CharacterForm from "./characterForm";
+import MobileForm from "./mobileForm";
 
-import CharacterForm from './characterForm';
-
-
-const Heading = () => {
-	return (
-		<HeadingContainer>
-			<h1>
-				MYTHIC <span>PLUS</span> PROFILE<span>.</span>
-			</h1>
-			<CharacterForm />
-		</HeadingContainer>
-	);
+const Heading = (props) => {
+  const [showMobileForm, setShowMobileForm] = useState(false);
+  const handleMobileButtonClick = () => {
+    setShowMobileForm(!showMobileForm);
+  };
+  return (
+    <HeadingContainer>
+      <Logo />
+      {props.characterData && props.characterData.length > 0 ? (
+        <HeadingContentContainer>
+          <CharacterForm />
+          <MobileButton onClick={handleMobileButtonClick}>
+            {showMobileForm ? "CLOSE" : "ADD"}
+          </MobileButton>
+        </HeadingContentContainer>
+      ) : null}
+      <MobileForm
+        showMobileForm={showMobileForm}
+        setShowMobileForm={setShowMobileForm}
+      />
+    </HeadingContainer>
+  );
 };
 
-export default Heading;
+const mapStateToProps = (state) => {
+  return {
+    characterData: state.characters.characterData,
+  };
+};
+export default connect(mapStateToProps)(Heading);
 
 const HeadingContainer = styled.div`
-width: 100%;
-position: absolute;
-top: 0;
-left: 0;
-padding: 1rem 3rem;
-box-sizing: border-box;
-display: flex;
-flex-direction: row;
-justify-content: space-between;
-align-items: center;
+  ${flex("row", "space-between", "center")};
+  width: 100%;
+  padding-top: 0.5rem;
 
-span {
-  color: #3bca8b;
-}
-`
+  span {
+    color: ${colors.main.secondary};
+  }
+  div.form-container {
+    ${flex("row", "flex-end", "center")};
+    form {
+      ${flex("row", "center", "center")};
+      width: auto;
+
+      input,
+      select {
+        width: auto;
+        font-size: 0.9rem;
+      }
+    }
+    button {
+      width: auto;
+    }
+
+    @media (max-width: 1035px) {
+      display: none;
+    }
+  }
+`;
+
+const HeadingContentContainer = styled.div`
+  ${flex("column", "center", "end")}
+  width: 70%;
+`;
+
+const MobileButton = styled(MainButton)`
+  display: none;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 6rem;
+  padding: 0.5rem;
+  @media (max-width: 1035px) {
+    display: flex;
+  }
+`;
