@@ -39,16 +39,16 @@ export default Character;
 const CharacterContainer = styled.div`
   ${flex("row", "space-between", "center")};
   width: 100%;
-  border: 1px solid black;
   margin-bottom: 0.3rem;
   padding: 1rem;
   background-color: ${colors.main.primary.light};
   color: ${colors.main.light};
   text-shadow: -1px -1px 0 #000, -1px 1px 0 #000, 1px -1px 0 #000;
   font-weight: 700;
+  border-radius: 0.6rem;
 
   &:hover {
-    background-color: ${colors.main.primary.highlight};
+    background-color: ${colors.main.primary.extra_dark};
   }
 `;
 

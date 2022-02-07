@@ -57,16 +57,16 @@ const Characters = ({
     <CharactersDataContainer>
       <ButtonContainer>
         <Button onClick={() => handleClick()}>
-          <RefreshIcon className={isSpinning ? "spin" : null} />
+          <RefreshIcon className={isSpinning ? "spin" : null} />{" "}
+          <ButtonLabelWithIcon>Refresh</ButtonLabelWithIcon>
         </Button>
         <DeleteToggleButton
           onClick={() => handleToggleShowDelete()}
           showDelete={showDelete}
         >
-          <DeleteIcon />
+          <DeleteIcon /> <ButtonLabelWithIcon>Delete</ButtonLabelWithIcon>
         </DeleteToggleButton>
 
-        <FilterButtonContainer>
           <FilterSelect onChange={handleFilterChange} defaultValue="ALL">
             <option value="WEEK">Weekly</option>
             <option value="ALL">Overall</option>
@@ -78,7 +78,7 @@ const Characters = ({
             onClick={() => handleFilterClick("WEEK")}
             value="WEEK"
           >
-            Weekly
+            <ButtonLabel>Weekly</ButtonLabel>
           </FilterButton>
           <FilterButton
             active={activeFilter}
@@ -92,16 +92,15 @@ const Characters = ({
             onClick={() => handleFilterClick("TYR")}
             value="TYR"
           >
-            Tyrannical
+            <ButtonLabel>Tyrannical</ButtonLabel>
           </FilterButton>
           <FilterButton
             active={activeFilter}
             onClick={() => handleFilterClick("FORT")}
             value="FORT"
           >
-            Fortified
+            <ButtonLabel>Fortified</ButtonLabel>
           </FilterButton>
-        </FilterButtonContainer>
       </ButtonContainer>
       <DataContainer>
         {characterData
@@ -135,13 +134,22 @@ const CharactersDataContainer = styled.div`
   height: 100%;
 `;
 
+const ButtonLabel = styled.div`
+  ${flex("row", "center", "center")};
+`;
+
+const ButtonLabelWithIcon = styled(ButtonLabel)`
+  margin-left: 1rem;
+`;
+
 const Button = styled.button`
   ${flex("row", "center", "center")};
-  background-color: ${colors.main.secondary};
-  color: ${colors.main.primary.dark};
+  background-color: ${colors.main.primary.light};
+  color: ${colors.main.light};
   margin: 0;
   padding: 0.5rem 1rem;
-  font-size: 1.3rem;
+  font-size: 1rem;
+  border-radius: 0.3rem;
 
   &:focus {
     outline: none;
@@ -150,21 +158,21 @@ const Button = styled.button`
   &:hover {
     cursor: pointer;
   }
+
+  @media (max-width: 650px) {
+    svg {
+      display: none;
+    }
+  }
 `;
 
 const FilterButton = styled(Button)`
   font-size: 1rem;
-  font-weight: bold;
   margin: 0px;
   background-color: ${(props) =>
     props.active === props.value
-      ? colors.main.secondary
-      : colors.main.primary.dark};
-
-  color: ${(props) =>
-    props.active === props.value
-      ? colors.main.primary.dark
-      : colors.main.secondary};
+      ? colors.main.primary.extra_dark
+      : colors.main.primary.light};
 
   @media (max-width: 530px) {
     display: none;
@@ -172,32 +180,24 @@ const FilterButton = styled(Button)`
 `;
 
 const ButtonContainer = styled.div`
-  ${flex("row", "space-between", "end", "none")};
-  width: 100%;
-`;
-
-const FilterButtonContainer = styled(ButtonContainer)`
-  justify-content: flex-end;
-  @media (max-width: 530px) {
-    width: 80%;
-  }
+  ${flex("row", "center", "center", "none")};
+  width: auto;
+  margin-bottom: 1rem;
 `;
 
 const DataContainer = styled.div`
   ${flex("column", "flex-start", "center")};
   width: 100%;
   min-height: 80%;
-  border-top: 1px solid ${colors.main.secondary};
 `;
 
 const FilterSelect = styled(Select)`
   display: none;
   padding: 0.2rem 1rem;
-  margin-bottom: 0;
   width: 9rem;
   font-size: 1rem;
-  background-color: ${colors.main.primary.dark};
-  color: ${colors.main.secondary};
+  background-color: ${colors.main.primary.light};
+  color: ${colors.main.light};
   &:hover {
     border: none;
   }
@@ -209,9 +209,10 @@ const FilterSelect = styled(Select)`
 
 const DeleteToggleButton = styled(Button)`
   background-color: ${(props) =>
-    props.showDelete ? colors.main.secondary : colors.main.primary.dark};
+    props.showDelete
+      ? colors.main.primary.extra_dark
+      : colors.main.primary.light};
   svg path {
-    stroke: ${(props) =>
-      props.showDelete ? colors.main.primary.dark : colors.main.secondary};
+    stroke: ${colors.main.light};
   }
 `;

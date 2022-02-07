@@ -75,7 +75,7 @@ const CharacterForm = ({
             handleSubmit();
           }}
         >
-          {characterList.length > 0 ? "+" : "ADD"}
+          ADD
         </MainButton>
       </FormContainer>
       {error ? (
@@ -110,17 +110,17 @@ const FormContainer = styled.div`
   }
 
   input {
-    width: 50%;
+    width: 70%;
   }
 
   select {
-    width: 50%;
+    width: 70%;
   }
 
-  @media (max-width: 530px) {
+  /* @media (max-width: 530px) {
     input,
     select {
       width: 80%;
     }
-  }
+  } */
 `;

@@ -1,5 +1,6 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
+import { colors } from "../../styles";
 
 export const CircleIcon = (props) => {
   return (
@@ -61,10 +62,7 @@ export const RefreshIcon = (props) => {
       xmlns="http://www.w3.org/2000/svg"
       className={props.className}
     >
-      <path
-        d="M.5 7.5A7 7 0 0 1 13 3.17m1.5 4.33A7 7 0 0 1 2 11.83m3-.33H1.5V15m12-15v3.5H10"
-        stroke="#000"
-      />
+      <path d="M.5 7.5A7 7 0 0 1 13 3.17m1.5 4.33A7 7 0 0 1 2 11.83m3-.33H1.5V15m12-15v3.5H10" />
     </RefreshSVG>
   );
 };
@@ -80,6 +78,9 @@ const rotate = keyframes`
 `;
 
 const RefreshSVG = styled.svg`
+  path {
+    stroke: ${colors.main.light};
+  }
   &.spin {
     animation: ${rotate} 1s linear infinite;
   }
