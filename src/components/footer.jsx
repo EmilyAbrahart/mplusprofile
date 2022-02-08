@@ -13,10 +13,6 @@ const Footer = () => {
 export default Footer;
 
 const FooterContainer = styled.div`
-  /* position: fixed;
-  width: 100%;
-  bottom: 0;
-  left: 0; */
   text-align: center;
   padding: 0.5rem;
   background-color: ${colors.main.primary.dark};
