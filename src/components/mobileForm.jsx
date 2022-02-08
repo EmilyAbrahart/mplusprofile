@@ -32,7 +32,6 @@ const MobileForm = (props) => {
     );
     setName("");
     setServer("");
-    // setRegion("");
   };
 
   return (

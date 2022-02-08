@@ -58,13 +58,6 @@ const CharacterClass = styled.div`
   font-size: 1.3rem;
 `;
 
-// const DeleteButton = styled.button`
-//   ${flex("row", "center", "center")};
-//   padding: 0.3rem;
-//   color: ${colors.main.warning};
-//   display: ${(props) => (props.showDelete ? "flex" : "none")};
-// `;
-
 const ScoreContainer = styled.div`
   font-weight: 700;
   font-size: 1.3rem;

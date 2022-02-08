@@ -116,11 +116,4 @@ const FormContainer = styled.div`
   select {
     width: 70%;
   }
-
-  /* @media (max-width: 530px) {
-    input,
-    select {
-      width: 80%;
-    }
-  } */
 `;

@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { flex, colors } from "../styles";
-import HeroArt from "../img/HeroArt.png";
+import HeroArt from "../img/HeroArt.webp";
 import CharacterForm from "./characterForm";
 
 const Welcome = () => {
