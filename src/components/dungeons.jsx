@@ -13,8 +13,8 @@ const Dungeons = (props) => {
     { key: 6, name: "", dungeon: "" },
     { key: 7, name: "", dungeon: "" },
     { key: 8, name: "", dungeon: "" },
-    { key: 9, name: "", dungeon: "" },
-    { key: 10, name: "", dungeon: "" },
+    // { key: 9, name: "", dungeon: "" },
+    // { key: 10, name: "", dungeon: "" },
   ];
   return (
     <DungeonsContainer active={props.active}>

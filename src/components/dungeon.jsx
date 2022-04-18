@@ -10,6 +10,8 @@ import PF from "../img/dungeons/PF.webp";
 import SD from "../img/dungeons/SD.webp";
 import SOA from "../img/dungeons/SOA.webp";
 import TOP from "../img/dungeons/TOP.webp";
+import GMBT from "../img/dungeons/GMBT.webp";
+import STRT from "../img/dungeons/STRT.webp";
 
 const Dungeon = ({ name, dungeon }) => {
   return (
@@ -54,6 +56,10 @@ const DungeonContainer = styled.div`
       ? `url(${SOA})`
       : props.name === "TOP" && props.dungeon.mythic_level
       ? `url(${TOP})`
+      : props.name === "GMBT" && props.dungeon.mythic_level
+      ? `url(${GMBT})`
+      : props.name === "STRT" && props.dungeon.mythic_level
+      ? `url(${STRT})`
       : props.name === "DOS"
       ? `linear-gradient(black, black),url(${DOS})`
       : props.name === "HOA"
@@ -70,6 +76,10 @@ const DungeonContainer = styled.div`
       ? `linear-gradient(black, black),url(${SOA})`
       : props.name === "TOP"
       ? `linear-gradient(black, black),url(${TOP})`
+      : props.name === "GMBT"
+      ? `linear-gradient(black, black),url(${GMBT})`
+      : props.name === "STRT"
+      ? `linear-gradient(black, black),url(${STRT})`
       : null};
   background: ${(props) =>
     props.dungeon ? null : "linear-gradient(black, black),"};

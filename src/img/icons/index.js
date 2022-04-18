@@ -2,6 +2,16 @@ import React from "react";
 import styled, { keyframes } from "styled-components";
 import { colors } from "../../styles";
 
+// icon spin keyframe
+const rotate = keyframes`
+ from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+`;
+
 export const CircleIcon = (props) => {
   return (
     <svg
@@ -42,16 +52,25 @@ export const FortifiedIcon = (props) => {
   );
 };
 
-export const AddIcon = () => {
+export const AddIcon = (props) => {
   return (
-    <svg width="15" height="15" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <AddSVG width="15" height="15" fill="none" xmlns="http://www.w3.org/2000/svg" className={props.className}>
       <path
         d="M7.5 4v7M4 7.5h7m-3.5 7a7 7 0 1 1 0-14 7 7 0 0 1 0 14Z"
         stroke="#000"
       />
-    </svg>
+    </AddSVG>
   );
 };
+
+const AddSVG = styled.svg`
+path {
+  stroke: ${colors.main.light};
+}
+&.spin {
+  animation: ${rotate} 1s linear infinite;
+}
+`
 
 export const RefreshIcon = (props) => {
   return (
@@ -67,15 +86,7 @@ export const RefreshIcon = (props) => {
   );
 };
 
-// refresh icon styling
-const rotate = keyframes`
- from {
-          transform: rotate(0deg);
-        }
-        to {
-          transform: rotate(360deg);
-        }
-`;
+
 
 const RefreshSVG = styled.svg`
   path {
