@@ -3,10 +3,10 @@ import { connect } from "react-redux";
 import styled from "styled-components";
 import { getCharacterData } from "../state/actions/characters";
 import { flex, colors } from "../styles";
-import { Form, Input, Select, MainButton } from "../styles/components";
+import { Form, Input, Select, MainButton} from "../styles/components";
 
 const CharacterForm = ({
-  characters: { characterList, error },
+  characters: { characterList, error},
   getCharacterData,
 }) => {
   const [name, setName] = useState("");
