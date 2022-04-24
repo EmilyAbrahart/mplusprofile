@@ -13,8 +13,6 @@ const Dungeons = (props) => {
     { key: 6, name: "", dungeon: "" },
     { key: 7, name: "", dungeon: "" },
     { key: 8, name: "", dungeon: "" },
-    // { key: 9, name: "", dungeon: "" },
-    // { key: 10, name: "", dungeon: "" },
   ];
   return (
     <DungeonsContainer active={props.active}>
@@ -87,9 +85,9 @@ const DungeonsContainer = styled.div`
   }
   div.dungeon:nth-child(1),
   div.dungeon:nth-child(4),
-  div.dungeon:nth-child(10) {
+  div.dungeon:nth-child(8) {
     border: ${(props) =>
       props.active === "WEEK"
         ? "1px solid " + colors.main.secondary
-        : "none"};  
+        : "1px solid black"};  
 `;
