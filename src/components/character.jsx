@@ -15,7 +15,9 @@ const Character = (props) => {
               X
             </DeleteButton>
           ) : (
-            <img src={props.avatar} alt="avatar" />
+            <a href={props.profile} target='_blank'>
+              <img src={props.avatar} alt="avatar" />
+            </a>
           )}
         </Avatar>
         <NameContainer>{props.name}</NameContainer>
