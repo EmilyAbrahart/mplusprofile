@@ -7,19 +7,22 @@ import { Form, Input, Select, MainButton } from "../styles/components";
 
 const MobileForm = (props) => {
   const [name, setName] = useState("");
-  const [server, setServer] = useState("");
+  // server input is different to allow for string manipulation before being sent to the api to ensure it fits the standard format
+  const [serverInput, setServerInput] = useState("");
   const [region, setRegion] = useState("");
 
   const handleNameChange = (event) => {
     setName(event.target.value);
   };
   const handleServerChange = (event) => {
-    setServer(event.target.value);
+    setServerInput(event.target.value);
   };
   const handleRegionChange = (event) => {
     setRegion(event.target.value);
   };
   const handleSubmit = () => {
+        // serverInput.replace(remove all punctuation).replace(replace spaces with dashes).lowercase
+        const server = serverInput.replace(/[!@#$%^&\*\(\)~`_\+=\[\]\{\};:"\.\,<>\/?'-]/g, '').replace(/\s+/g, '-').toLowerCase();
     const newCharacter = {
       name,
       server,
@@ -31,7 +34,7 @@ const MobileForm = (props) => {
       newCharacter.region
     );
     setName("");
-    setServer("");
+    setServerInput("");
   };
 
   return (
@@ -50,7 +53,7 @@ const MobileForm = (props) => {
             name="server"
             placeholder="Server"
             onChange={handleServerChange}
-            value={server}
+            value={serverInput}
           />
 
           <Select
@@ -62,7 +65,7 @@ const MobileForm = (props) => {
               Region
             </option>
             <option value="EU">EU</option>
-            <option value="NA">NA</option>
+            <option value="US">US</option>
           </Select>
         </Form>
         <MainButton
