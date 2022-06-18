@@ -69,7 +69,7 @@ const characterReducer = (state = initialState, action) => {
         error: "",
         characterData: [
           ...state.characterData.filter(
-            (char) => char.name !== action.payload.name
+            (char) => char.characterSlug !== action.payload.name+slugged(action.payload.server)
           ),
           {
             name: action.payload.name,
@@ -114,7 +114,7 @@ const characterReducer = (state = initialState, action) => {
       return {
         ...state,
         characterList: state.characterList.filter(
-          (c) => c.name.toLowerCase()+slugged(c.server) !== action.payload
+          (c) => c.name.toLowerCase()+c.server !== action.payload
         ),
         characterData: state.characterData.filter(
           (c) => c.name.toLowerCase()+slugged(c.server) !== action.payload

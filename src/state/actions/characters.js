@@ -60,7 +60,7 @@ export const updateCharacterData =
 export const deleteCharacter = (characterSlug) => (dispatch) => {
   const characters = JSON.parse(localStorage.getItem("characters"));
   const updatedCharacters = JSON.stringify(
-    characters.filter((c) => c.name.toLowerCase()+slugged(c.server) !== characterSlug)
+    characters.filter((c) => c.name.toLowerCase()+c.server !== characterSlug)
   );
   localStorage.setItem("characters", updatedCharacters);
 

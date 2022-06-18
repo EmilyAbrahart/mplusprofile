@@ -28,7 +28,7 @@ const Home = ({
   // fetch character data
   useEffect(() => {
     characterList.forEach((character) => {
-      if (!characterData.some((char) => char.name === character.name)) {
+      if (!characterData.some((char) => char.name.toLowerCase() === character.name.toLowerCase() && char.server.toLowerCase() === character.server.toLowerCase()  )) {
         getCharacterData(character.name, character.server, character.region);
       }
     });

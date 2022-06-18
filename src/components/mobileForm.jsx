@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import styled from "styled-components";
 import { getCharacterData } from "../state/actions/characters";
 import { slugged } from "../utlities/slugged";
-import {trimmed} from '../utlities/trimmed';
+import { trimmed } from "../utlities/trimmed";
 import { flex, colors } from "../styles";
 import { Form, Input, Select, MainButton } from "../styles/components";
 
@@ -29,11 +29,19 @@ const MobileForm = (props) => {
       server,
       region,
     };
-    props.getCharacterData(
-      newCharacter.name,
-      newCharacter.server,
-      newCharacter.region
-    );
+    if (
+      !props.characterList.some(
+        (character) =>
+          (character.name + character.server).toLowerCase() ===
+          (newCharacter.name + newCharacter.server).toLowerCase()
+      )
+    ) {
+      props.getCharacterData(
+        newCharacter.name,
+        newCharacter.server,
+        newCharacter.region
+      );
+    }
     setNameInput("");
     setServerInput("");
   };
