@@ -109,7 +109,7 @@ const Characters = ({
           )
           .map((character, index) => (
             <Character
-              key={character.name}
+              key={character.characterSlug}
               {...character}
               index={index}
               deleteCharacter={deleteCharacter}

@@ -1,6 +1,7 @@
 import * as types from "../types";
 import store from "../store";
 import axios from "axios";
+import {slugged} from '../../utlities/slugged';
 
 export const getCharacters = () => (dispatch) => {
   const characters = JSON.parse(localStorage.getItem("characters"));
@@ -19,7 +20,7 @@ export const getCharacterData = (name, server, region) => async (dispatch) => {
     );
     const characters = await store.getState().characters.characterList;
     const character = { name, server, region };
-    if (!characters.some((a) => a.name === character.name)) {
+    if (!characters.some((a) => a.name.toLowerCase()+slugged(a.server) === character.name.toLowerCase()+slugged(character.server))) {
       characters.push(character);
     }
     dispatch({ type: types.ADD_CHARACTER_SUCCESS, payload: characters });
@@ -56,15 +57,15 @@ export const updateCharacterData =
     }
   };
 
-export const deleteCharacter = (name) => (dispatch) => {
+export const deleteCharacter = (characterSlug) => (dispatch) => {
   const characters = JSON.parse(localStorage.getItem("characters"));
   const updatedCharacters = JSON.stringify(
-    characters.filter((c) => c.name.toLowerCase() !== name.toLowerCase())
+    characters.filter((c) => c.name.toLowerCase()+slugged(c.server) !== characterSlug)
   );
   localStorage.setItem("characters", updatedCharacters);
 
   dispatch({
     type: types.DELETE_CHARACTER,
-    payload: name,
+    payload: characterSlug,
   });
 };
