@@ -34,6 +34,7 @@ const Heading = (props) => {
 const mapStateToProps = (state) => {
   return {
     characterData: state.characters.characterData,
+    characterList: state.characters.characterList,
   };
 };
 export default connect(mapStateToProps)(Heading);

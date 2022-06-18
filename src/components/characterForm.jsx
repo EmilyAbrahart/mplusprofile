@@ -3,12 +3,12 @@ import { connect } from "react-redux";
 import styled from "styled-components";
 import { getCharacterData } from "../state/actions/characters";
 import { slugged } from "../utlities/slugged";
-import {trimmed} from '../utlities/trimmed';
+import { trimmed } from "../utlities/trimmed";
 import { flex, colors } from "../styles";
-import { Form, Input, Select, MainButton} from "../styles/components";
+import { Form, Input, Select, MainButton } from "../styles/components";
 
 const CharacterForm = ({
-  characters: { characterList, error},
+  characters: { characterList, error },
   getCharacterData,
 }) => {
   const [nameInput, setNameInput] = useState("");
@@ -27,17 +27,28 @@ const CharacterForm = ({
   const handleSubmit = () => {
     const name = trimmed(nameInput);
     const server = slugged(trimmed(serverInput));
-    
+
     const newCharacter = {
       name,
       server,
       region,
     };
-    getCharacterData(
-      newCharacter.name,
-      newCharacter.server,
-      newCharacter.region
-    );
+
+    if (
+      !characterList.some(
+        (character) =>
+          (character.name + character.server).toLowerCase() ===
+          (newCharacter.name + newCharacter.server).toLowerCase()
+      )
+    ) {
+    
+      getCharacterData(
+        newCharacter.name,
+        newCharacter.server,
+        newCharacter.region
+      );
+    }
+
     setNameInput("");
     setServerInput("");
   };
