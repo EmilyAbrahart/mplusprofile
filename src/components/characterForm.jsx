@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import { getCharacterData } from "../state/actions/characters";
+import { slugged } from "../utlities/slugged";
 import { flex, colors } from "../styles";
 import { Form, Input, Select, MainButton} from "../styles/components";
 
@@ -24,8 +25,7 @@ const CharacterForm = ({
     setRegion(event.target.value);
   };
   const handleSubmit = () => {
-    // serverInput.replace(remove all punctuation).replace(replace spaces with dashes).lowercase
-    const server = serverInput.replace(/[!@#$%^&\*\(\)~`_\+=\[\]\{\};:"\.\,<>\/?'-]/g, '').replace(/\s+/g, '-').toLowerCase();
+    const server = slugged(serverInput);
     
     const newCharacter = {
       name,

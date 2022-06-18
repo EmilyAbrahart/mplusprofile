@@ -1,4 +1,5 @@
 import * as types from "../types";
+import {slugged} from '../../utlities/slugged';
 
 const initialState = {
   characterList: JSON.parse(localStorage.getItem("characters")) || [],
@@ -29,6 +30,8 @@ const characterReducer = (state = initialState, action) => {
           ...state.characterData,
           {
             name: action.payload.name,
+            server: action.payload.realm,
+            characterSlug: action.payload.name.toLowerCase()+slugged(action.payload.realm),
             class: action.payload.class,
             spec: action.payload.active_spec_name,
             role: action.payload.active_spec_role,
@@ -70,6 +73,8 @@ const characterReducer = (state = initialState, action) => {
           ),
           {
             name: action.payload.name,
+            server: action.payload.realm,
+            characterSlug: action.payload.name.toLowerCase()+slugged(action.payload.realm),
             class: action.payload.class,
             spec: action.payload.active_spec_name,
             role: action.payload.active_spec_role,
@@ -109,10 +114,10 @@ const characterReducer = (state = initialState, action) => {
       return {
         ...state,
         characterList: state.characterList.filter(
-          (c) => c.name.toLowerCase() !== action.payload.toLowerCase()
+          (c) => c.name.toLowerCase()+slugged(c.server) !== action.payload
         ),
         characterData: state.characterData.filter(
-          (c) => c.name !== action.payload
+          (c) => c.name.toLowerCase()+slugged(c.server) !== action.payload
         ),
       };
     case types.GET_CHARACTER_DATA_FAILURE:

@@ -11,7 +11,7 @@ const Character = (props) => {
       <CharacterClass>
         <Avatar>
           {props.showDelete ? (
-            <DeleteButton onClick={() => props.deleteCharacter(props.name)}>
+            <DeleteButton onClick={() => props.deleteCharacter(props.characterSlug)}>
               X
             </DeleteButton>
           ) : (
