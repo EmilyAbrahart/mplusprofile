@@ -3,17 +3,17 @@ import { connect } from "react-redux";
 import styled from "styled-components";
 import { getCharacterData } from "../state/actions/characters";
 import { slugged } from "../utlities/slugged";
+import {trimmed} from '../utlities/trimmed';
 import { flex, colors } from "../styles";
 import { Form, Input, Select, MainButton } from "../styles/components";
 
 const MobileForm = (props) => {
-  const [name, setName] = useState("");
-  // server input is different to allow for string manipulation before being sent to the api to ensure it fits the standard format
+  const [nameInput, setNameInput] = useState("");
   const [serverInput, setServerInput] = useState("");
   const [region, setRegion] = useState("");
 
   const handleNameChange = (event) => {
-    setName(event.target.value);
+    setNameInput(event.target.value);
   };
   const handleServerChange = (event) => {
     setServerInput(event.target.value);
@@ -22,7 +22,8 @@ const MobileForm = (props) => {
     setRegion(event.target.value);
   };
   const handleSubmit = () => {
-    const server = slugged(serverInput);
+    const name = trimmed(nameInput);
+    const server = slugged(trimmed(serverInput));
     const newCharacter = {
       name,
       server,
@@ -33,7 +34,7 @@ const MobileForm = (props) => {
       newCharacter.server,
       newCharacter.region
     );
-    setName("");
+    setNameInput("");
     setServerInput("");
   };
 
@@ -46,7 +47,7 @@ const MobileForm = (props) => {
             name="name"
             placeholder="Character Name"
             onChange={handleNameChange}
-            value={name}
+            value={nameInput}
           />
           <Input
             type="text"
