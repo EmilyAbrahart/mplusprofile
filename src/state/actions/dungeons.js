@@ -10,7 +10,7 @@ export const getDungeons = () => async (dispatch) => {
         `);
     dispatch({
       type: types.GET_DUNGEON_DATA_SUCCESS,
-      payload: dungeonData.data.dungeons,
+      payload: dungeonData.data.seasons[0].dungeons,
     });
   } catch (err) {
     dispatch({
