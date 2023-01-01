@@ -12,6 +12,15 @@ import SOA from "../img/dungeons/SOA.webp";
 import TOP from "../img/dungeons/TOP.webp";
 import GMBT from "../img/dungeons/GMBT.webp";
 import STRT from "../img/dungeons/STRT.webp";
+import AA from '../img/dungeons/AA.webp';
+import AV from '../img/dungeons/AV.webp';
+import COS from '../img/dungeons/COS.webp';
+import HOV from '../img/dungeons/HOV.webp';
+import NO from '../img/dungeons/NO.webp';
+import RLP from '../img/dungeons/RLP.webp';
+import SBG from '../img/dungeons/SBG.webp';
+import TJS from '../img/dungeons/TJS.webp';
+
 
 const Dungeon = ({ name, dungeon }) => {
   return (
@@ -60,6 +69,22 @@ const DungeonContainer = styled.div`
       ? `url(${GMBT})`
       : props.name === "STRT" && props.dungeon.mythic_level
       ? `url(${STRT})`
+      : props.name === "AA" && props.dungeon.mythic_level
+      ? `url(${AA})`
+      : props.name === "AV" && props.dungeon.mythic_level
+      ? `url(${AV})`
+      : props.name === "COS" && props.dungeon.mythic_level
+      ? `url(${COS})`
+      : props.name === "HOV" && props.dungeon.mythic_level
+      ? `url(${HOV})`
+      : props.name === "NO" && props.dungeon.mythic_level
+      ? `url(${NO})`
+      : props.name === "RLP" && props.dungeon.mythic_level
+      ? `url(${RLP})`
+      : props.name === "SBG" && props.dungeon.mythic_level
+      ? `url(${SBG})`
+      : props.name === "TJS" && props.dungeon.mythic_level
+      ? `url(${TJS})`
       : props.name === "DOS"
       ? `linear-gradient(black, black),url(${DOS})`
       : props.name === "HOA"
@@ -80,6 +105,22 @@ const DungeonContainer = styled.div`
       ? `linear-gradient(black, black),url(${GMBT})`
       : props.name === "STRT"
       ? `linear-gradient(black, black),url(${STRT})`
+      : props.name === "AA"
+      ? `linear-gradient(black, black),url(${AA})`
+      : props.name === "AV"
+      ? `linear-gradient(black, black),url(${AV})`
+      : props.name === "COS"
+      ? `linear-gradient(black, black),url(${COS})`
+      : props.name === "HOV"
+      ? `linear-gradient(black, black),url(${HOV})`
+      : props.name === "NO"
+      ? `linear-gradient(black, black),url(${NO})`
+      : props.name === "RLP"
+      ? `linear-gradient(black, black),url(${RLP})`
+      : props.name === "SBG"
+      ? `linear-gradient(black, black),url(${SBG})`
+      : props.name === "TJS"
+      ? `linear-gradient(black, black),url(${TJS})`
       : null};
   background: ${(props) =>
     props.dungeon ? null : "linear-gradient(black, black),"};

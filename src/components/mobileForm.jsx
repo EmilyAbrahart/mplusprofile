@@ -86,9 +86,9 @@ const MobileForm = (props) => {
           ADD
         </MainButton>
       </FormContainer>
-      {props.error ? (
+      {/* {props.error ? (
         <div className="errorMessage">Character not found.</div>
-      ) : null}
+      ) : null} */}
     </Container>
   );
 };
