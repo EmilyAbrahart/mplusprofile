@@ -4,11 +4,11 @@ import styled from "styled-components";
 import { getCharacterData } from "../state/actions/characters";
 import { slugged } from "../utlities/slugged";
 import { trimmed } from "../utlities/trimmed";
-import { flex, colors } from "../styles";
+import { flex } from "../styles";
 import { Form, Input, Select, MainButton } from "../styles/components";
 
 const CharacterForm = ({
-  characters: { characterList, error },
+  characters: { characterList },
   getCharacterData,
 }) => {
   const [nameInput, setNameInput] = useState("");
@@ -93,11 +93,11 @@ const CharacterForm = ({
           ADD
         </MainButton>
       </FormContainer>
-      {error ? (
+      {/* {error ? (
         <ErrorContainer className="errorMessage" characterList={characterList}>
           Character not found.
         </ErrorContainer>
-      ) : null}
+      ) : null} */}
     </Container>
   );
 };
@@ -110,12 +110,12 @@ const Container = styled.div`
   border-radius: 1rem;
 `;
 
-const ErrorContainer = styled.div`
-  color: ${colors.main.warning};
-  @media (max-width: 1035px) {
-    display: ${(props) => (props.characterList.length > 0 ? "none" : "flex")};
-  }
-`;
+// const ErrorContainer = styled.div`
+//   color: ${colors.main.warning};
+//   @media (max-width: 1035px) {
+//     display: ${(props) => (props.characterList.length > 0 ? "none" : "flex")};
+//   }
+// `;
 const FormContainer = styled.div`
   ${flex("column", "center", "center")};
   width: 100%;

@@ -7,7 +7,7 @@ import { MainButton } from "../styles/components";
 
 const Character = (props) => {
   return (
-    <CharacterContainer index={props.index}>
+    <CharacterContainer index={props.index} color={props.dungeons.scores.all.color}>
       <CharacterClass>
         <Avatar>
           {props.showDelete ? (

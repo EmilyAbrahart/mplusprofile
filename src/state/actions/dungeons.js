@@ -6,7 +6,7 @@ export const getDungeons = () => async (dispatch) => {
 
   try {
     const dungeonData =
-      await axios.get(`https://raider.io/api/v1/mythic-plus/static-data?expansion_id=8
+      await axios.get(`https://raider.io/api/v1/mythic-plus/static-data?expansion_id=9
         `);
     dispatch({
       type: types.GET_DUNGEON_DATA_SUCCESS,
