@@ -20,6 +20,14 @@ import NO from '../img/dungeons/NO.webp';
 import RLP from '../img/dungeons/RLP.webp';
 import SBG from '../img/dungeons/SBG.webp';
 import TJS from '../img/dungeons/TJS.webp';
+import BH from '../img/dungeons/BH.webp';
+import FH from '../img/dungeons/FH.webp';
+import HOI from '../img/dungeons/HOI.webp';
+import NELT from '../img/dungeons/NELT.webp';
+import NL from '../img/dungeons/NL.webp';
+import ULD from '../img/dungeons/ULD.webp';
+import UNDR from '../img/dungeons/UR.webp';
+import VP from '../img/dungeons/VP.webp';
 
 
 const Dungeon = ({ name, dungeon }) => {
@@ -85,6 +93,22 @@ const DungeonContainer = styled.div`
       ? `url(${SBG})`
       : props.name === "TJS" && props.dungeon.mythic_level
       ? `url(${TJS})`
+      : props.name === "BH" && props.dungeon.mythic_level
+      ? `url(${BH})`
+      : props.name === "FH" && props.dungeon.mythic_level
+      ? `url(${FH})`
+      : props.name === "HOI" && props.dungeon.mythic_level
+      ? `url(${HOI})`
+      : props.name === "NELT" && props.dungeon.mythic_level
+      ? `url(${NELT})`
+      : props.name === "NL" && props.dungeon.mythic_level
+      ? `url(${NL})`
+      : props.name === "ULD" && props.dungeon.mythic_level
+      ? `url(${ULD})`
+      : props.name === "UNDR" && props.dungeon.mythic_level
+      ? `url(${UNDR})`
+      : props.name === "VP" && props.dungeon.mythic_level
+      ? `url(${VP})`
       : props.name === "DOS"
       ? `linear-gradient(black, black),url(${DOS})`
       : props.name === "HOA"
@@ -121,6 +145,22 @@ const DungeonContainer = styled.div`
       ? `linear-gradient(black, black),url(${SBG})`
       : props.name === "TJS"
       ? `linear-gradient(black, black),url(${TJS})`
+      : props.name === "BH"
+      ? `linear-gradient(black, black),url(${BH})`
+      : props.name === "FH"
+      ? `linear-gradient(black, black),url(${FH})`
+      : props.name === "HOI"
+      ? `linear-gradient(black, black),url(${HOI})`
+      : props.name === "NELT"
+      ? `linear-gradient(black, black),url(${NELT})`
+      : props.name === "NL"
+      ? `linear-gradient(black, black),url(${NL})`
+      : props.name === "ULD"
+      ? `linear-gradient(black, black),url(${ULD})`
+      : props.name === "UNDR"
+      ? `linear-gradient(black, black),url(${UNDR})`
+      : props.name === "VP"
+      ? `linear-gradient(black, black),url(${VP})`
       : null};
   background: ${(props) =>
     props.dungeon ? null : "linear-gradient(black, black),"};

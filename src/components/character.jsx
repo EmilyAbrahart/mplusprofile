@@ -3,22 +3,18 @@ import styled from "styled-components";
 
 import Dungeons from "./dungeons";
 import { flex, colors } from "../styles";
-import { MainButton } from "../styles/components";
 
 const Character = (props) => {
   return (
-    <CharacterContainer index={props.index} color={props.dungeons.scores.all.color}>
+    <CharacterContainer
+      index={props.index}
+      color={props.dungeons.scores.all.color}
+    >
       <CharacterClass>
         <Avatar>
-          {props.showDelete ? (
-            <DeleteButton onClick={() => props.deleteCharacter(props.characterSlug)}>
-              X
-            </DeleteButton>
-          ) : (
-            <a href={props.profile} target='_blank'>
-              <img src={props.avatar} alt="avatar" />
-            </a>
-          )}
+          <a href={props.profile} target="_blank" rel="noopener noreferrer">
+            <img src={props.avatar} alt="avatar" />
+          </a>
         </Avatar>
         <NameContainer>{props.name}</NameContainer>
       </CharacterClass>
@@ -82,15 +78,4 @@ const Avatar = styled.div`
 const NameContainer = styled.div`
   width: 8rem;
   margin-right: 1rem;
-`;
-
-const DeleteButton = styled(MainButton)`
-  ${flex("row", "center", "center")};
-  border: 1px solid ${colors.main.warning};
-  height: 2.9rem;
-  width: 2rem;
-  padding: 0 1.5rem;
-  margin: 0;
-  background-color: ${colors.main.primary.dark};
-  color: ${colors.main.warning};
 `;

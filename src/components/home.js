@@ -8,6 +8,7 @@ import { getCharacterData } from "../state/actions/characters";
 import Heading from "./heading";
 import Characters from "./characters";
 import Welcome from "./welcome";
+import ManageCharacters from "./manageCharacters";
 import Footer from "./footer";
 
 import { flex } from "../styles";
@@ -28,7 +29,13 @@ const Home = ({
   // fetch character data
   useEffect(() => {
     characterList.forEach((character) => {
-      if (!characterData.some((char) => char.name.toLowerCase() === character.name.toLowerCase() && char.server.toLowerCase() === character.server.toLowerCase()  )) {
+      if (
+        !characterData.some(
+          (char) =>
+            char.name.toLowerCase() === character.name.toLowerCase() &&
+            char.server.toLowerCase() === character.server.toLowerCase()
+        )
+      ) {
         getCharacterData(character.name, character.server, character.region);
       }
     });
@@ -40,6 +47,7 @@ const Home = ({
       <MainContent>
         {characterData.length > 0 ? <Characters /> : <Welcome />}
       </MainContent>
+      <ManageCharacters />
       <Footer />
     </HomeContainer>
   );

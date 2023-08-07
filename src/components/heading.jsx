@@ -70,7 +70,7 @@ const HeadingContainer = styled.div`
 `;
 
 const HeadingContentContainer = styled.div`
-  ${flex("column", "center", "end")}
+  ${flex("row", "center", "space-between")}
   width: 70%;
 `;
 
