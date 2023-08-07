@@ -17,6 +17,7 @@ const ManageCharacters = ({
   };
 
   return (
+    characterList.length > 0 ? 
     <ManageCharactersContainer>
       <CharacterContainer showManageCharacters={showManageCharacters}>
         {characterList.map((c) => (
@@ -39,6 +40,7 @@ const ManageCharacters = ({
         Manage Characters
       </ManageCharactersButton>
     </ManageCharactersContainer>
+    : null
   );
 };
 
