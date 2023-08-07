@@ -1,11 +1,13 @@
 import React from "react";
 import styled from "styled-components";
-import {colors} from '../styles';
+import { colors } from "../styles";
 
 const Footer = () => {
   return (
     <FooterContainer>
-      Powered by <a href="https://raider.io/">Raider.io</a> {"\u2764"}
+      <div>
+        Powered by <a href="https://raider.io/">Raider.io</a> {"\u2764"}
+      </div>
     </FooterContainer>
   );
 };

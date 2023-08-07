@@ -4,24 +4,19 @@ import { connect } from "react-redux";
 
 import Character from "./character";
 
-import {
-  updateCharacterData,
-  deleteCharacter,
-} from "../state/actions/characters";
+import { updateCharacterData } from "../state/actions/characters";
 
 import { flex, colors } from "../styles";
 import { Select } from "../styles/components";
-import { RefreshIcon, DeleteIcon } from "../img/icons";
+import { RefreshIcon } from "../img/icons";
 
 const Characters = ({
   characters: { characterList, characterData },
   dungeons: { dungeonData },
   updateCharacterData,
-  deleteCharacter,
 }) => {
   const [activeFilter, setActiveFilter] = useState("ALL");
   const [isSpinning, setIsSpinning] = useState(false);
-  const [showDelete, setShowDelete] = useState(false);
 
   const handleFilterChange = (event) => {
     setActiveFilter(event.target.value);
@@ -45,10 +40,6 @@ const Characters = ({
     });
   };
 
-  const handleToggleShowDelete = () => {
-    setShowDelete(!showDelete);
-  };
-
   const handleFilterClick = (filter) => {
     setActiveFilter(filter);
   };
@@ -60,12 +51,6 @@ const Characters = ({
           <RefreshIcon className={isSpinning ? "spin" : null} />{" "}
           <ButtonLabelWithIcon>Refresh</ButtonLabelWithIcon>
         </Button>
-        <DeleteToggleButton
-          onClick={() => handleToggleShowDelete()}
-          showDelete={showDelete}
-        >
-          <DeleteIcon /> <ButtonLabelWithIcon>Delete</ButtonLabelWithIcon>
-        </DeleteToggleButton>
 
         <FilterSelect onChange={handleFilterChange} defaultValue="ALL">
           <option value="WEEK">Weekly</option>
@@ -112,10 +97,8 @@ const Characters = ({
               key={character.characterSlug}
               {...character}
               index={index}
-              deleteCharacter={deleteCharacter}
               dungeonData={dungeonData}
               active={activeFilter}
-              showDelete={showDelete}
             />
           ))}
       </DataContainer>
@@ -125,7 +108,6 @@ const Characters = ({
 
 export default connect((state) => state, {
   updateCharacterData,
-  deleteCharacter,
 })(Characters);
 
 const CharactersDataContainer = styled.div`
@@ -207,15 +189,5 @@ const FilterSelect = styled(Select)`
 
   @media (max-width: 530px) {
     display: block;
-  }
-`;
-
-const DeleteToggleButton = styled(Button)`
-  background-color: ${(props) =>
-    props.showDelete
-      ? colors.main.primary.extra_dark
-      : colors.main.primary.light};
-  svg path {
-    stroke: ${colors.main.light};
   }
 `;
